@@ -88,7 +88,7 @@ public class AboutPanel extends JFrame {
         madeIn.setText("Coded with ❤ in Bogotá");
         commentLabel.setText("Write your comments here...");
         sendButton.setText("Send!");
-        version.setText("V2.1.0");
+        version.setText("V3.1.4");
 
         sendButton.addActionListener(new OpinionListener(sendButton, commentArea));
         rate5.addMouseListener(new ReviewListener(rate5, opinionImage));

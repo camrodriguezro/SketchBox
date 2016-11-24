@@ -51,7 +51,7 @@ public class ButtonListener implements ActionListener {
             if (Desktop.isDesktopSupported()) {
                 try {
                     
-                    File myFile = new File("src/Resources/Mockup1.pdf");
+                    File myFile = new File("C://Users//Estudiante//Documents//NetBeansProjects//SketchBox//src//Resources//Documentation.pdf");
                     Desktop.getDesktop().open(myFile);
                 } catch (IOException ex) {
                     // no application registered for PDFs

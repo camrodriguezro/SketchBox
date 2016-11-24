@@ -12,15 +12,21 @@ public class Pad extends JComponent {
 
     /*Hereda de JComponent con el fin de poder luego incrustarlo como un 
       componente más en el cuadro general*/
+    
     private Image image;
     //Sobre una imagen en blanco es donde se va a pintar
+    
     private Graphics2D pen;
     //Es la herramienta que permite dibujar
+    
     private int oldX, oldY, actualX, actualY;
     /*Simulan las posiciones del mouse, si el mouse se mueve, el puntero va 
       desde un (oldX,oldY) a un (actualX,actualY)*/
+    
     private final SizedStack<Image> undoStack = new SizedStack<>(12);
-
+    /*Una pila de doce imagenes: Aquí se guardan cada imagen a la que se le
+      realicen cambios*/
+    
     public Pad() {
         //Constructor
         this.setDoubleBuffered(true);
@@ -42,7 +48,10 @@ public class Pad extends JComponent {
             setImage(undoStack.pop());
         }
     }
-
+    /*Método "Deshacer": Si la pila tiene algún elemento (significa que hubo un
+      cambio), entonces que se asigne a la imagen del Pad, la última imagen de 
+      la fila, es decir, el último cambio*/
+    
     private void setImage(Image img) {
         pen = (Graphics2D) img.getGraphics();
         pen.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
@@ -50,6 +59,8 @@ public class Pad extends JComponent {
         image = img;
         repaint();
     }
+    /*Permite asignar una imagen al Pad y sija el color del lapiz a negro. Se usa
+      para asignar el último cambio (la última imagen) al Pad*/
 
     private BufferedImage copyImage(Image img) {
         BufferedImage copyOfImage = new BufferedImage(getSize().width, getSize().height, BufferedImage.TYPE_INT_RGB);
@@ -57,11 +68,15 @@ public class Pad extends JComponent {
         g.drawImage(img, 0, 0, getWidth(), getHeight(), null);
         return copyOfImage;
     }
+    /*Permite copiar la imagen acutal (La que se está haciendo en el Pad. Esto 
+      con el fin de que posteriormente esta copia se coloca en la pila*/
 
     protected void saveToStack(Image img) {
         undoStack.push(copyImage(img));
     }
-
+    /*Permite enviar copias de una imagen (en este caso la que se está editando)
+      en el Pad) a la pila*/
+    
     public void setOldX(int actualX) {
         this.oldX = actualX;
     }
@@ -111,6 +126,7 @@ public class Pad extends JComponent {
     public Image getImage() {
         return this.image;
     }
+    //Permite obtener la imagen sobre la cual se está trabajando
 
     @Override
     public void paintComponent(Graphics g) {
@@ -122,12 +138,12 @@ public class Pad extends JComponent {
         }
         g.drawImage(image, 0, 0, null);
     }
-
     /*Este es el lienzo para pintar: Si no hay nada en ella, entonces crea una 
       imagen del tamaño de la ventana, asigna el valor de Graphics a la imagen
       (mediante esta acción podemos modificar directamente los gráficos del 
       componente) Asigna las constantes de renderización, borra el "tintero" del 
       lapiz mediante el método .clear y finalmente dibuja la imagen.*/
+    
     public void clear() {
         pen.setPaint(Color.white);
         pen.fillRect(0, 0, getSize().width, getSize().height);
