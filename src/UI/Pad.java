@@ -1,5 +1,6 @@
 package UI;
 
+import Reactions.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -71,7 +72,7 @@ public class Pad extends JComponent {
     /*Permite copiar la imagen acutal (La que se está haciendo en el Pad. Esto 
       con el fin de que posteriormente esta copia se coloca en la pila*/
 
-    protected void saveToStack(Image img) {
+    public void saveToStack(Image img) {
         undoStack.push(copyImage(img));
     }
     /*Permite enviar copias de una imagen (en este caso la que se está editando)

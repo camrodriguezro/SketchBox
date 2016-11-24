@@ -1,5 +1,6 @@
 package UI;
 
+import Reactions.*;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.BorderFactory;
@@ -21,6 +22,8 @@ public class LateralPanel extends JPanel{
     private JButton info = new JButton();
     private JButton aboutUs = new JButton();
     private Pad drawPad;
+    /*Notese que en todos los métodos se mantiene el orden de los componentes a 
+      fin de ser más claro*/
     
     public LateralPanel(Pad drawPad){
         this.drawPad = drawPad;
@@ -42,6 +45,10 @@ public class LateralPanel extends JPanel{
         this.add(info);
         this.add(aboutUs);
     }
+    /*Constructor: Asocia el Pad respectivo, luego llama al método ".setLook()"
+      que básicamente define la estetica de los compoenentes del panel. Fija el
+      tamaño del panel a 35x68 pixeles y añade todos los botones: En el orden en
+      que se agregan es el orden en que aparecen.*/
     
     private void setLook(){
         blackButton.setName("black");
@@ -101,7 +108,13 @@ public class LateralPanel extends JPanel{
         undoButton.setIcon(new ImageIcon(getClass().getResource("/Resources/undoIcon.png")));
         save.setIcon(new ImageIcon(getClass().getResource("/Resources/saveIcon.png")));
         info.setIcon(new ImageIcon(getClass().getResource("/Resources/info.png")));
-        aboutUs.setIcon(new ImageIcon(getClass().getResource("/Resources/aboutUs.png")));
-                
+        aboutUs.setIcon(new ImageIcon(getClass().getResource("/Resources/aboutUs.png")));          
     }
+    /*Estiliza los componentes del panel: Asigna un "Name" a cada botón, este
+      identifica al botón y le permita al ButtonListener diferenciar botones. A 
+      los botones de colores les asigna un icono pintado y luego define un tamaño
+      de 30x30 pixeles para todos los botones. Agrega un ButtonListener a cada
+      botón, éste se basará en el "Name" de cada botón para ejecutar la acción
+      determinada. Finalmente a los últimos cinco (5) botones les borrar el margen
+      y les asigna un icono basado en una imagen*/
 }
